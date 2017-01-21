@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+
+from .common import *  # noqa
+
+SECRET_KEY="dasdas"
+STATIC_ROOT = "{{ pillar['user_homedir'] }}/public"
+
+ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': environ.os.path.join(BASE_DIR, 'AwesomeGameServer.db'),
+    }
+}
+
+INSTALLED_APPS += ('opbeat.contrib.django',)
+OPBEAT = {
+    'ORGANIZATION_ID': "{{ pillar['opbeat']['ORGANIZATION_ID']}}",
+    'APP_ID': "{{ pillar['opbeat']['APP_ID']}}",
+    'SECRET_TOKEN': "{{ pillar['opbeat']['SECRET_TOKEN']}}"
+}
+MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+    'opbeat.contrib.django.middleware.Opbeat404CatchMiddleware',
+) + MIDDLEWARE_CLASSES
+
+EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+
+MAILGUN_ACCESS_KEY = '{{ pillar['mailgun']['access_key'] }}'
+MAILGUN_SERVER_NAME = '{{ pillar['mailgun']['server_name'] }}'
