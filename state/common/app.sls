@@ -6,7 +6,7 @@
 virtualenv-{{ user_name}}:
   virtualenv.managed:
     - name: {{ user_homedir }}/venv
-        - cwd: {{ user_homedir }}/source
+    - cwd: {{ user_homedir }}/source
     - system_site_packages: False
     - requirements: {{ user_homedir }}/source/requirements.txt
     - pip_upgrade: True

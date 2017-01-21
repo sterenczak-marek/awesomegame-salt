@@ -56,36 +56,26 @@
 
 {{ user_homedir }}/log:
   file.directory:
-    - use:
-      - file: {{ user_name }}
-    - require:
-      - file: {{ user_name }}
+    - user: {{ user_name }}
 
 {{ user_homedir }}/tmp:
   file.directory:
-    - use:
-      - file: {{ user_name }}
-    - require:
-      - file: {{ user_name }}
+    - user: {{ user_name }}
 
 {{ user_homedir }}/public:
   file.directory:
-    - use:
-      - file: {{ user_name }}
+    - user: {{ user_name }}
 
 {{ user_homedir }}/source:
   file.directory:
-    - use:
-      - file: {{ user_name }}
+    - user: {{ user_name }}
 
 {{ user_homedir }}/config:
   file.directory:
-    - use:
-      - file: {{ user_name }}
+    - user: {{ user_name }}
 
 {{ user_homedir }}/.ssh:
   file.directory:
-    - use:
-      - file: {{ user_name }}
+    - user: {{ user_name }}
     - require:
         - ssh_auth: {{ user_name }}
