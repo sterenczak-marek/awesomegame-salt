@@ -31,20 +31,6 @@
     - require:
       - group: {{ user_name }}-group
 
-  ssh_auth.present:
-    - user: {{ user_name }}
-    - source: salt://common/files/ssh_key.pub
-    - require:
-      - file: {{ user_name }}
-
-  file.directory:
-    - name: {{ user_homedir }}
-    - user: {{ user_name }}
-    - group: {{ user_name }}
-    - require:
-      - user: {{ user_name }}
-      - group: {{ user_name }}-group
-
 {{ user_name }}-group-www:
   cmd.run:
     - name: adduser www-data {{ user_name }}
@@ -73,9 +59,3 @@
 {{ user_homedir }}/config:
   file.directory:
     - user: {{ user_name }}
-
-{{ user_homedir }}/.ssh:
-  file.directory:
-    - user: {{ user_name }}
-    - require:
-        - ssh_auth: {{ user_name }}

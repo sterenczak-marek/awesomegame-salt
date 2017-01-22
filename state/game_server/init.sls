@@ -18,7 +18,7 @@ auth-token:
   cmd.run:
     - name: {{ user_homedir }}/venv/bin/python manage.py create_user
     - runas: {{ user_name }}
-    - cwd: {{ user_homedir }}/source/AwesomeGame/{{ app_name }}
+    - cwd: {{ user_homedir }}/source
     - statefull: True
     - require:
       - cmd: django-migrate
