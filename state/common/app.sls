@@ -92,6 +92,7 @@ django-collectstatic:
       - file: {{ user_homedir }}/public
       - file: {{ user_homedir }}/source/config/settings/production.py
       - file: {{ user_homedir }}/source/manage.py
+      - environ: set-env
     - watch:
       - file: deploy-code
 
@@ -104,6 +105,7 @@ django-migrate:
       - virtualenv: virtualenv-{{ user_name}}
       - file: {{ user_homedir }}/source/config/settings/production.py
       - file: {{ user_homedir }}/source/manage.py
+      - environ: set-env
     - watch:
       - file: deploy-code
 

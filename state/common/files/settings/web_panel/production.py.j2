@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': environ.os.path.join(BASE_DIR, 'AwesomeGameServer.db'),
+        'NAME': project_root('AwesomeGameServer.db'),
     }
 }
 

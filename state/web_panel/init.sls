@@ -24,6 +24,13 @@ deploy-code:
     - watch_in:
       - cmd: supervisor-restart
 
+set-env:
+  environ.setenv:
+    - name: CLOUDAMQP_URL
+    - value: redis://localhost:6379
+    - require:
+      - pkg: redis-packages
+
 initial-data:
   cmd.wait:
     - name: {{ user_homedir }}/venv/bin/python manage.py loaddata initial_users
