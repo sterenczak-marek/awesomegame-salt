@@ -13,6 +13,16 @@ include:
 {% set user_homedir=pillar['user_homedir'] %}
 {% set salt_path=pillar['salt_path'] %}
 
+deploy-code:
+  file.recurse:
+    - source: salt://awesomegame-panel
+    - name: {{ user_homedir }}/source
+    - user: {{ user_name }}
+    - exclude_pat: E@(venv)|(src/static/vendor)
+    - require:
+        - pkg: python-django-packages
+    - watch_in:
+      - cmd: supervisor-restart
 
 initial-data:
   cmd.wait:
@@ -23,53 +33,6 @@ initial-data:
       - cmd: django-migrate
     - watch:
       - file: deploy-code
-
-
-# TODO: zrobić ssh-keygen
-keygen:
-  cmd.run:
-    - name: ssh-keygen -q -f {{ salt_path }}/salt-ssh.rsa -N ""
-    - runas: {{ user_name }}
-    - unless: test -f {{ salt_path }}/salt-ssh.rsa
-
-copy-key:
-  cmd.run:
-    - name: cp {{ salt_path }}/salt-ssh.rsa.pub {{ user_homedir }}/config/
-    - watch:
-      - cmd: keygen
-    - require:
-      - file: {{ user_homedir }}/config
-
-
-salt-virtualenv:
-  virtualenv.managed:
-    - name: {{ salt_path }}/venv
-    - user: {{ user_name }}
-    - cwd: {{ salt_path }}
-    - system_site_packages: False
-    - requirements: {{ salt_path }}/requirements.txt
-    - pip_upgrade: True
-    - require:
-      - file: deploy-code
-      - pkg: python-virtualenv-packages
-    - watch_in:
-      - cmd: supervisor-restart
-
-salt-venv-permission:
-  file.directory:
-    - name: {{ salt_path }}/venv
-    - user: {{ user_name }}
-    - group: {{ user_name }}
-    - file_mode: 750
-    - dir_mode: 750
-    - recurse:
-        - user
-        - group
-        - mode
-    - require:
-        - virtualenv: salt-virtualenv
-    - require_in:
-      - file: /etc/supervisor/conf.d/celery-{{user_name}}.conf
 
 /etc/dd-agent/datadog.conf:
   file.managed:

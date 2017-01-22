@@ -13,6 +13,16 @@ include:
 {% set user_homedir=pillar['user_homedir'] %}
 
 
+deploy-code:
+  file.recurse:
+    - source: salt://awesomegame-game
+    - name: {{ user_homedir }}/source
+    - user: {{ user_name }}
+    - exclude_pat: E@(venv)|(src/static/vendor)
+    - require:
+        - pkg: python-django-packages
+    - watch_in:
+      - cmd: supervisor-restart
 
 auth-token:
   cmd.run:

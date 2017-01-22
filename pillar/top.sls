@@ -1,12 +1,11 @@
 base:
-  '(game|web)-server-.*':
+  '(game|web)-.*':
     - match: pcre
     - private
     - private_panel
 
-  'game-server-.*':
-    - match: pcre
+  'game-*':
     - game-server
 
-  'web-server':
+  'web-*':
     - web-server

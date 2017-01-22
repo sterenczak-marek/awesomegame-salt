@@ -43,17 +43,6 @@ clean_pyc:
     - watch:
       - file: deploy-code
 
-deploy-code:
-  file.recurse:
-    - source: salt://awesomegame-game
-    - name: {{ user_homedir }}/source
-    - user: {{ user_name }}
-    - exclude_pat: E@(venv)|(src/static/vendor)
-    - require:
-        - pkg: python-django-packages
-    - watch_in:
-      - cmd: supervisor-restart
-
 {{ user_homedir }}/source/config/settings/production.py:
   file.managed:
     - source: salt://common/files/settings/{{ app_name }}/production.py.j2

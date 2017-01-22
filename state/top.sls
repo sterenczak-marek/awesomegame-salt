@@ -1,6 +1,5 @@
 base:
-  'game-server-.*':
-    - match: pcre
+  'game-*':
     - game_server
-  'web-server':
+  'web-*':
     - web_panel
