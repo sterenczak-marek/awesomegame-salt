@@ -7,7 +7,8 @@ command = {{virtualenv_home}}/bin/uwsgi
  --chown-socket={{user_name}}
  --module=config.wsgi_django:application
  --env DJANGO_SETTINGS_MODULE=config.settings.production
- --master --pidfile={{tmp_dir}}/uwsgi.pid
+ --master
+ --pidfile={{tmp_dir}}/uwsgi.pid
  --socket={{tmp_dir}}/django.socket
  --max-requests=5000
  --buffer-size=32768

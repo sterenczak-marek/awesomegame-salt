@@ -54,7 +54,7 @@ service-celery:
         app_name: '{{ app_name }}'
         virtualenv_home: '{{ user_homedir }}/venv'
         user_homedir: '{{ user_homedir }}'
-        app_dir: '{{ user_homedir }}/source/AwesomeGame/{{ app_name }}'
+        app_dir: '{{ user_homedir }}/source'
         tmp_dir: '{{ user_homedir }}/tmp'
         user_name: '{{ user_name }}'
     - require:
@@ -71,7 +71,7 @@ service-celery:
         app_name: '{{ app_name }}'
         virtualenv_home: '{{ user_homedir }}/venv'
         user_homedir: '{{ user_homedir }}'
-        app_dir: '{{ user_homedir }}/source/AwesomeGame/{{ app_name }}'
+        app_dir: '{{ user_homedir }}/source'
         tmp_dir: '{{ user_homedir }}/tmp'
         user_name: '{{ user_name }}'
     - require:
@@ -86,7 +86,7 @@ service-celery:
     - template: jinja
     - context:
         user_name: '{{ user_name }}'
-        app_dir: '{{ user_homedir }}/source/AwesomeGame/{{ app_name }}'
+        app_dir: '{{ user_homedir }}/source'
         virtualenv_home: '{{ user_homedir }}/venv'
         django_module: '{{ celery_module }}'
     - require:

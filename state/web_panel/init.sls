@@ -18,7 +18,7 @@ initial-data:
   cmd.wait:
     - name: {{ user_homedir }}/venv/bin/python manage.py loaddata initial_users
     - runas: {{ user_name }}
-    - cwd: {{ user_homedir }}/source/AwesomeGame/{{ app_name }}
+    - cwd: {{ user_homedir }}/source
     - require:
       - cmd: django-migrate
     - watch:
