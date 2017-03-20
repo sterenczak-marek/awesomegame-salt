@@ -24,12 +24,17 @@ deploy-code:
     - watch_in:
       - cmd: supervisor-restart
 
-set-env:
+amqp-env:
   environ.setenv:
     - name: CLOUDAMQP_URL
     - value: redis://localhost:6379
     - require:
       - pkg: redis-packages
+
+secret_key_env:
+  environ.setenv:
+    - name: SECRET_KEY
+    - value: {{ pillar['SECRET_KEY'].get(app_name, 'TEST') }}
 
 initial-data:
   cmd.wait:
