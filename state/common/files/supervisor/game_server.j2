@@ -1,6 +1,7 @@
 [program:{{app_name}}]
 user={{user_name}}
 directory={{app_dir}}
+environment = CLOUDAMQP_URL="redis://localhost:6379"
 command = {{virtualenv_home}}/bin/uwsgi
  --chdir={{app_dir}}
  --chmod-socket=664

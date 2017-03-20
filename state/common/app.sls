@@ -73,7 +73,7 @@ npm-bower:
 
 bower-app:
   cmd.wait:
-    - name: {{ user_homedir }}/node_modules/.bin/bower install -p --config.directory="{{ user_homedir }}/public/vendor" --allow-root
+    - name: {{ user_homedir }}/node_modules/.bin/bower install -p --config.directory="{{ user_homedir }}/public" --allow-root
     - runas: {{ user_name }}
     - cwd: {{ user_homedir }}/source
     - require:

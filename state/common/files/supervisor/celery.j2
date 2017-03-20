@@ -1,7 +1,7 @@
 [program:celery-{{user_name}}]
 user={{user_name}}
 directory={{app_dir}}
-environment = DJANGO_SETTINGS_MODULE="config.settings.production"
+environment = DJANGO_SETTINGS_MODULE="config.settings.production", CLOUDAMQP_URL="redis://localhost:6379"
 command = {{virtualenv_home}}/bin/celery --app={{django_module}} worker --loglevel=info
 autostart=true
 autorestart=true
