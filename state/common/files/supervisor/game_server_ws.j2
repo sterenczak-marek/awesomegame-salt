@@ -1,7 +1,9 @@
 [program:{{app_name}}-ws]
 user={{user_name}}
 directory={{app_dir}}
-environment = CLOUDAMQP_URL="redis://localhost:6379"
+environment =
+    CLOUDAMQP_URL="redis://localhost:6379"
+    SECRET_KEY="{{secret_key}}
 command = {{virtualenv_home}}/bin/uwsgi
  --chdir={{app_dir}}
  --module=config.wsgi_websockets:application

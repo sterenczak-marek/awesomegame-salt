@@ -14,6 +14,7 @@ supervisor:
 {% set app_name=pillar['app_name'] %}
 {% set user_homedir=pillar['user_homedir'] %}
 {% set celery_module=pillar['celery_module'] %}
+{% set secret_key=pillar['SECRET_KEY'].get(app_name, 'TEST') %}
 
 
 service-{{ app_name }}:
@@ -57,6 +58,7 @@ service-celery:
         app_dir: '{{ user_homedir }}/source'
         tmp_dir: '{{ user_homedir }}/tmp'
         user_name: '{{ user_name }}'
+        secret_key: '{{ secret_key }}'
     - require:
       - pkg: supervisor
 
@@ -74,6 +76,7 @@ service-celery:
         app_dir: '{{ user_homedir }}/source'
         tmp_dir: '{{ user_homedir }}/tmp'
         user_name: '{{ user_name }}'
+        secret_key: '{{ secret_key }}'
     - require:
       - pkg: supervisor
 
@@ -89,5 +92,6 @@ service-celery:
         app_dir: '{{ user_homedir }}/source'
         virtualenv_home: '{{ user_homedir }}/venv'
         django_module: '{{ celery_module }}'
+        secret_key: '{{ secret_key }}'
     - require:
       - pkg: supervisor
