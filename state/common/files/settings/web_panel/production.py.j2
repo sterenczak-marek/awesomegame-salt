@@ -30,3 +30,5 @@ EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 
 MAILGUN_ACCESS_KEY = '{{ pillar['mailgun']['access_key'] }}'
 MAILGUN_SERVER_NAME = '{{ pillar['mailgun']['server_name'] }}'
+
+BOWER_PATH = "{{ pillar['user_homedir'] }}/node_modules/.bin/bower"

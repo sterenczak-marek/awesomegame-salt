@@ -1,5 +1,13 @@
 server {
+	listen 80 default_server;
+	server_name _;
+	return 444;
+}
+
+
+server {
 	listen 80;
+	server_name awesomegame.sterenczak.me;
 
 	location / {
 		include /etc/nginx/uwsgi_params;

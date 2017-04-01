@@ -71,20 +71,34 @@ npm-bower:
     - require:
       - pkg: bower-packages
 
+secret_key_env:
+  environ.setenv:
+    - name: SECRET_KEY
+    - value: {{ pillar['SECRET_KEY'].get(app_name, 'TEST') }}
+
+amqp-env:
+  environ.setenv:
+    - name: CLOUDAMQP_URL
+    - value: redis://localhost:6379
+    - require:
+      - pkg: redis-packages
+
 bower-app:
   cmd.wait:
-    - name: {{ user_homedir }}/node_modules/.bin/bower install -p --config.directory="{{ user_homedir }}/public" --allow-root
+    - name: {{ user_homedir }}/venv/bin/python manage.py bower_install --allow-root
     - runas: {{ user_name }}
     - cwd: {{ user_homedir }}/source
     - require:
       - npm: npm-bower
       - file: {{ user_homedir }}/public
+      - environ: secret_key_env
+      - environ: amqp-env
     - watch:
       - file: deploy-code
 
 django-collectstatic:
   cmd.wait:
-    - name: {{ user_homedir }}/venv/bin/python manage.py collectstatic -i vendor --noinput
+    - name: {{ user_homedir }}/venv/bin/python manage.py collectstatic --noinput
     - runas: {{ user_name }}
     - cwd: {{ user_homedir }}/source
     - require:
