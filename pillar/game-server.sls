@@ -5,3 +5,5 @@ user_homedir: /home/{{ username }}
 app_name: game_server
 
 celery_module: src.game
+
+host_name: awesomegame-srv.sterenczak.me

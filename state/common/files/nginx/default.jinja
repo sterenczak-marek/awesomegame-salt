@@ -7,7 +7,7 @@ server {
 
 server {
 	listen 80;
-	server_name awesomegame.sterenczak.me;
+	server_name {{ host_name }};
 
 	location / {
 		include /etc/nginx/uwsgi_params;

@@ -17,6 +17,7 @@ nginx:
     - context:
         user_home: '{{ pillar['user_homedir'] }}'
         tmp_dir: '{{ tmp_dir }}'
+        host_name: '{{ pillar['host_name'] }}'
 
 /etc/nginx/sites-enabled/default:
   file.symlink:

@@ -5,12 +5,16 @@ from .common import *  # noqa
 SECRET_KEY="dasdas"
 STATIC_ROOT = "{{ pillar['user_homedir'] }}/public"
 
-ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}', 'awesomegame.sterenczak.me']
+ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}', '{{ pillar['host_name'] }}']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': project_root('AwesomeGameServer.db'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{ pillar['DB_NAME'] }}',
+        'USER': '{{ pillar['DB_USER'] }}',
+        'PASSWORD': '{{ pillar['DB_PASS'] }}',
+        'HOST': '{{ pillar['DB_HOST'] }}',
+        'PORT': '5432',
     }
 }
 
