@@ -6,4 +6,4 @@ app_name: game_server
 
 celery_module: src.game
 
-host_name: awesomegame-srv.sterenczak.me
+host_name: awesomegame-srv1.sterenczak.me

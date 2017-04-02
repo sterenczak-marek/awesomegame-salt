@@ -35,6 +35,15 @@ auth-token:
     - watch:
       - file: deploy-code
 
+db-perms:
+  file.managed:
+    - name: {{ user_homedir }}/source/AwesomeGameServer.db
+    - user: {{ user_name }}
+    - group: {{ user_name }}
+    - mode: 600
+    - require:
+      - cmd: django-migrate
+
 /etc/dd-agent/datadog.conf:
   file.managed:
     - source: salt://common/files/datadog/datadog.conf.j2

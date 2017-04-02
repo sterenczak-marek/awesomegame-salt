@@ -8,7 +8,7 @@ Connect to Datadog:
     - require:
       - pkg: Server administrator packages
     - env:
-      - DD_API_KEY: {{ pillar['datadog_key'] }}
+      - DD_API_KEY: {{ pillar['datadog']['api_key'] }}
     - unless: test -e /etc/init.d/datadog-agent
 
 Restart datadog:

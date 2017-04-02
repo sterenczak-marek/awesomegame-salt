@@ -5,7 +5,7 @@ from .common import *  # noqa
 SECRET_KEY="dasdas"
 STATIC_ROOT = "{{ pillar['user_homedir'] }}/public"
 
-ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}']
+ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}', '{{ pillar['host_name'] }}']
 
 DATABASES = {
     'default': {
@@ -29,3 +29,5 @@ EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 
 MAILGUN_ACCESS_KEY = '{{ pillar['mailgun']['access_key'] }}'
 MAILGUN_SERVER_NAME = '{{ pillar['mailgun']['server_name'] }}'
+
+BOWER_PATH = "{{ pillar['user_homedir'] }}/node_modules/.bin/bower"
