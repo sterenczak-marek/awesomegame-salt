@@ -18,6 +18,7 @@ command = {{virtualenv_home}}/bin/uwsgi
  --vacuum
  --home={{virtualenv_home}}
  --umask 002
+ --harakiri=20
  --logto=/home/{{user_name}}/log/uwsgi.txt
 autostart=true
 autorestart=true

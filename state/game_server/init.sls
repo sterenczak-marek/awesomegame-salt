@@ -26,7 +26,7 @@ deploy-code:
 
 auth-token:
   cmd.run:
-    - name: {{ user_homedir }}/venv/bin/python manage.py create_user
+    - name: {{ user_homedir }}/venv/bin/python manage.py panel_user
     - runas: {{ user_name }}
     - cwd: {{ user_homedir }}/source
     - statefull: True
@@ -43,14 +43,3 @@ db-perms:
     - mode: 600
     - require:
       - cmd: django-migrate
-
-/etc/dd-agent/datadog.conf:
-  file.managed:
-    - source: salt://common/files/datadog/datadog.conf.j2
-    - template: jinja
-    - context:
-        type: game
-    - require:
-        - cmd: Connect to Datadog
-    - watch_in:
-      - cmd: Restart datadog

@@ -14,3 +14,12 @@ Connect to Datadog:
 Restart datadog:
   cmd.run:
     - name: service datadog-agent restart
+
+/etc/dd-agent/datadog.conf:
+  file.managed:
+    - source: salt://common/files/datadog/datadog.conf.j2
+    - template: jinja
+    - require:
+        - cmd: Connect to Datadog
+    - watch_in:
+      - cmd: Restart datadog

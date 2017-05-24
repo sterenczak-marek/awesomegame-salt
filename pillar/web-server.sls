@@ -9,6 +9,5 @@ celery_module: common
 salt_path: /home/{{ username }}/source/AwesomeGame/salt
 
 host_name: awesomegame.sterenczak.me
-
-DB_NAME: 'webpanel'
-DB_USER: 'web_panel'
+dd_server_name: web-panel
+dd_server_type: panel

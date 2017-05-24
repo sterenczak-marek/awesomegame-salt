@@ -43,19 +43,29 @@
 {{ user_homedir }}/log:
   file.directory:
     - user: {{ user_name }}
+    - require:
+      - user: {{ user_name }}
 
 {{ user_homedir }}/tmp:
   file.directory:
     - user: {{ user_name }}
+    - require:
+      - user: {{ user_name }}
 
 {{ user_homedir }}/public:
   file.directory:
     - user: {{ user_name }}
+    - require:
+      - user: {{ user_name }}
 
 {{ user_homedir }}/source:
   file.directory:
     - user: {{ user_name }}
+    - require:
+      - user: {{ user_name }}
 
 {{ user_homedir }}/config:
   file.directory:
     - user: {{ user_name }}
+    - require:
+      - user: {{ user_name }}

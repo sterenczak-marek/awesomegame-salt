@@ -4,6 +4,6 @@ dd_url: https://app.datadoghq.com
 api_key: {{ pillar['datadog']['api_key'] }}
 gce_updated_hostname: yes
 
-tags: server:{{ type }}
+tags: server:{{ pillar['dd_server_type'] }}
 
-agent-hostname: {{ pillar['server_name'] }}
+hostname: {{ pillar['dd_server_name'] }}

@@ -71,18 +71,6 @@ npm-bower:
     - require:
       - pkg: bower-packages
 
-secret_key_env:
-  environ.setenv:
-    - name: SECRET_KEY
-    - value: {{ pillar['SECRET_KEY'].get(app_name, 'TEST') }}
-
-amqp-env:
-  environ.setenv:
-    - name: CLOUDAMQP_URL
-    - value: redis://localhost:6379
-    - require:
-      - pkg: redis-packages
-
 bower-app:
   cmd.wait:
     - name: {{ user_homedir }}/venv/bin/python manage.py bower_install --allow-root
@@ -91,8 +79,6 @@ bower-app:
     - require:
       - npm: npm-bower
       - file: {{ user_homedir }}/public
-      - environ: secret_key_env
-      - environ: amqp-env
     - watch:
       - file: deploy-code
 
@@ -106,8 +92,6 @@ django-collectstatic:
       - file: {{ user_homedir }}/public
       - file: {{ user_homedir }}/source/config/settings/production.py
       - file: {{ user_homedir }}/source/manage.py
-      - environ: amqp-env
-      - environ: secret_key_env
     - watch:
       - file: deploy-code
 
@@ -120,16 +104,11 @@ django-migrate:
       - virtualenv: virtualenv-{{ user_name}}
       - file: {{ user_homedir }}/source/config/settings/production.py
       - file: {{ user_homedir }}/source/manage.py
-      - environ: amqp-env
-      - environ: secret_key_env
     - watch:
       - file: deploy-code
 
 supervisor-restart:
   cmd.wait:
-    - name: |
-        supervisorctl restart {{ app_name }}
-        supervisorctl restart {{ app_name }}-ws
-        supervisorctl restart celery-{{user_name}}
+    - name: supervisorctl restart all
     - require:
         - pkg: supervisor

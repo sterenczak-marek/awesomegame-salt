@@ -2,10 +2,10 @@
 
 from .common import *  # noqa
 
-SECRET_KEY="dasdas"
+SECRET_KEY = "{{ pillar['SECRET_KEY'] }}"
 STATIC_ROOT = "{{ pillar['user_homedir'] }}/public"
 
-ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}', '{{ pillar['host_name'] }}']
+ALLOWED_HOSTS = ['{{ pillar['host_name'] }}']
 
 DATABASES = {
     'default': {
@@ -31,3 +31,6 @@ MAILGUN_ACCESS_KEY = '{{ pillar['mailgun']['access_key'] }}'
 MAILGUN_SERVER_NAME = '{{ pillar['mailgun']['server_name'] }}'
 
 BOWER_PATH = "{{ pillar['user_homedir'] }}/node_modules/.bin/bower"
+
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'

@@ -2,19 +2,15 @@
 
 from .common import *  # noqa
 
-SECRET_KEY="dasdas"
+SECRET_KEY = "{{ pillar['SECRET_KEY'] }}"
 STATIC_ROOT = "{{ pillar['user_homedir'] }}/public"
 
-ALLOWED_HOSTS = ['{{ pillar['IP_ADDR'] }}', '{{ pillar['host_name'] }}']
+ALLOWED_HOSTS = ['{{ pillar['host_name'] }}']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '{{ pillar['DB_NAME'] }}',
-        'USER': '{{ pillar['DB_USER'] }}',
-        'PASSWORD': '{{ pillar['DB_PASS'] }}',
-        'HOST': '{{ pillar['DB_HOST'] }}',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': project_root('AwesomeGamePanel.db'),
     }
 }
 
@@ -39,3 +35,6 @@ BOWER_PATH = "{{ pillar['user_homedir'] }}/node_modules/.bin/bower"
 
 DD_API_KEY = "{{ pillar['datadog']['api_key'] }}"
 DD_APP_KEY = "{{ pillar['datadog']['app_key'] }}"
+
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
