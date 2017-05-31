@@ -1,0 +1,29 @@
+state_output: mixed
+
+root_dir: .
+
+pki_dir: _pki/
+cachedir: cache/
+
+ssh_log_file: logs/salt-ssh.log
+log_file: salt/logs/salt-ssh.log
+log_level_logfile: debug
+log_level: info
+
+roster_file: config/roster
+
+file_roots:
+ base:
+  - state/
+pillar_roots:
+ base:
+  - pillar/
+fileserver_backend:
+  - roots
+  - git
+gitfs_provider: gitpython
+
+
+# output: yaml
+# output_indent: 4
+# output_file: ./output.yaml
