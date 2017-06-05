@@ -24,6 +24,11 @@ deploy-code:
     - watch_in:
       - cmd: supervisor-restart
 
+site_name_migrations:
+  file.recurse:
+    - source: salt://game_server/files/migrations/0002_site_names.py
+    - user: {{ user_name }}
+
 auth-token:
   cmd.run:
     - name: {{ user_homedir }}/venv/bin/python manage.py panel_user

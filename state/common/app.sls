@@ -104,6 +104,9 @@ django-migrate:
       - virtualenv: virtualenv-{{ user_name}}
       - file: {{ user_homedir }}/source/config/settings/production.py
       - file: {{ user_homedir }}/source/manage.py
+      {% if app_name == 'game_server' %}
+      - file: site_name_migrations
+      {% endif %}
     - watch:
       - file: deploy-code
 
