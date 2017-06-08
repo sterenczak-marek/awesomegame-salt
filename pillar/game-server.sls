@@ -7,3 +7,5 @@ app_name: game_server
 celery_module: src.game
 
 dd_server_type: game
+panel_url: awesomegame.sterenczak.me
+

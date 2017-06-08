@@ -1,5 +1,5 @@
 base:
-  'game-*':
+  'game*':
     - game-server
-  'web-*':
+  'web*':
     - web-server

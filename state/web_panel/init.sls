@@ -8,6 +8,9 @@ include:
   - common.virtualenv
   - common.app
 
+{% set user_name=pillar['user_name'] %}
+{% set user_homedir=pillar['user_homedir'] %}
+
 deploy-code:
   file.recurse:
     - source: salt://awesomegame-panel
@@ -18,3 +21,12 @@ deploy-code:
         - pkg: python-django-packages
     - watch_in:
       - cmd: supervisor-restart
+
+db-perms:
+  file.managed:
+    - name: {{ user_homedir }}/source/AwesomeGamePanel.db
+    - user: {{ user_name }}
+    - group: {{ user_name }}
+    - mode: 600
+    - require:
+      - cmd: django-migrate

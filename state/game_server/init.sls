@@ -25,9 +25,11 @@ deploy-code:
       - cmd: supervisor-restart
 
 site_name_migrations:
-  file.recurse:
-    - source: salt://game_server/files/migrations/0002_site_names.py
+  file.managed:
+    - name: {{ user_homedir }}/source/src/game/migrations/0002_site_names.py
+    - source: salt://game_server/files/migrations/0002_site_names.py.j2
     - user: {{ user_name }}
+    - template: jinja
 
 auth-token:
   cmd.run:

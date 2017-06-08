@@ -11,14 +11,14 @@ def change_site_domain_name(apps, schema_editor):
     Site.objects.update_or_create(
         id=settings.SITE_ID,
         defaults={
-            'domain': '{{ HOST_NAME }} ',
-            'name': "AwesomeGame {{ pillar['dd_server_name'] }}"
+            'domain': '{{ pillar['host_name'] }} ',
+            'name': "{{ pillar['dd_server_name'] }}"
         }
     )
     Site.objects.update_or_create(
         id=2,
         defaults={
-            'domain': '{{ panel_url }}',
+            'domain': '{{ pillar['panel_url'] }}',
             'name': 'AwesomeGame Panel'
         }
     )
